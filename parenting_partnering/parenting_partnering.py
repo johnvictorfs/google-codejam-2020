@@ -9,12 +9,8 @@ def overlaps(a, b):
 
 
 def get_match(acts):
-    periods = {
-        'C': [],
-        'J': []
-    }
+    periods = {'C': [], 'J': []}
     impossible = 'IMPOSSIBLE'
-
     result = ''
 
     for period in acts:
@@ -34,9 +30,11 @@ def get_match(acts):
             # At least one activity can't be done by either
             return 'IMPOSSIBLE'
         elif not overlaps_c:
+            # Assign to C
             periods['C'].append(period)
             result += 'C'
         elif not overlaps_j:
+            # Assign to J
             periods['J'].append(period)
             result += 'J'
 

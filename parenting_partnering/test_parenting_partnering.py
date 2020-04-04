@@ -21,10 +21,18 @@ def test_overlaps():
         (720, 1440)
     ) == False
 
+    assert parenting_partnering.overlaps(
+        (0, 720),
+        (710, 1440)
+    ) == True
+
 
 def reverse_all(text):
     # Each person in result can be reversed
     result = ''
+
+    if text == 'IMPOSSIBLE':
+        return 'IMPOSSIBLE'
 
     for char in text:
         if char == 'J':
@@ -35,7 +43,7 @@ def reverse_all(text):
     return result
 
 
-expected = [
+test_cases = [
     {
         'input': [(360, 480), (420, 540), (600, 660)],
         'output': 'CJC'
@@ -59,14 +67,22 @@ expected = [
     {
         'input': [(1, 2), (4, 5), (3, 4), (5, 6)],
         'output': 'JJJJ'
+    },
+    {
+        'input': [(1,2), (1,2), (1,2)],
+        'output': 'IMPOSSIBLE'
+    },
+    {
+        'input': [(1,2), (1,2), (3, 4)],
+        'output': 'JCJ'
     }
 ]
 
 
 def test_parenting_partnering():
-    for test_case in expected:
+    for case in test_cases:
         assert (
-            parenting_partnering.get_match(test_case['input']) == test_case['output']
+            parenting_partnering.get_match(case['input']) == case['output']
             or
-            parenting_partnering.get_match(test_case['input']) == reverse_all(test_case['output'])
+            parenting_partnering.get_match(case['input']) == reverse_all(case['output'])
         )
