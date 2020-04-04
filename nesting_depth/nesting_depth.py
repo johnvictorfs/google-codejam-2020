@@ -30,8 +30,9 @@ def get_nesting(numbers, _open=0, text=''):
             first, *rest = rest
         elif rest and int(rest[0]) > int(first):
             # Abrir parenteses extras necessários para o próximo número quando ele for maior que o atual
-            text += '(' * _open
-            _open += _open
+            amount = int(rest[0]) - _open
+            text += '(' * amount
+            _open += amount
             text += rest[0]
             first, *rest = rest
 
