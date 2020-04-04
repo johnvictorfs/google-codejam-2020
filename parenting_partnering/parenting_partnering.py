@@ -1,6 +1,3 @@
-import itertools
-
-
 def overlaps(a, b):
     a1_start, a2_end = a
     b2_start, b2_end = b
@@ -18,30 +15,33 @@ def get_match(acts):
     }
     impossible = 'IMPOSSIBLE'
 
-    text = ''
+    result = ''
 
     for period in acts:
         overlaps_c = False
         overlaps_j = False
 
+        # Add activity to first available if it doesn't overlap with one of the
+        # ones they are already doing
         for added_period in periods['C']:
             if overlaps(added_period, period):
                 overlaps_c = True
-
         for added_period in periods['J']:
             if overlaps(added_period, period):
                 overlaps_j = True
-        
+
         if overlaps_c and overlaps_j:
+            # At least one activity can't be done by either
             return 'IMPOSSIBLE'
         elif not overlaps_c:
             periods['C'].append(period)
-            text += 'C'
+            result += 'C'
         elif not overlaps_j:
             periods['J'].append(period)
-            text += 'J'
+            result += 'J'
 
-    return text
+    return result
+
 
 def parenting_partnering():
     test_cases = int(input())

@@ -16,8 +16,14 @@ def test_overlaps():
         (600, 660)
     ) == False
 
+    assert parenting_partnering.overlaps(
+        (0, 720),
+        (720, 1440)
+    ) == False
+
 
 def reverse_all(text):
+    # Each person in result can be reversed
     result = ''
 
     for char in text:
@@ -45,6 +51,14 @@ expected = [
     {
         'input': [(0, 720), (720, 1440)],
         'output': 'CC'
+    },
+    {
+        'input': [(1, 2), (3, 4), (4, 5), (5, 6)],
+        'output': 'CCCC'
+    },
+    {
+        'input': [(1, 2), (4, 5), (3, 4), (5, 6)],
+        'output': 'JJJJ'
     }
 ]
 
