@@ -20,11 +20,11 @@ test_cases = {
     '2342': '((2(3(4))2))'
 }
 
-def test_output_challenge_2():
+def test_output_nesting_depth():
     for _input, output in test_cases.items():
         assert nesting_depth.get_nesting(_input) == output
 
 
-def test_text_output_challenge_2():
+def test_text_output_nesting_depth():
     for index, (_input, output) in enumerate(test_cases.items()):
         assert nesting_depth.make_answer_string(index, _input) == f'Case #{index + 1}: {output}'

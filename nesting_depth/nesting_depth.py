@@ -8,10 +8,10 @@ def get_nesting(numbers, _open=0, text=''):
     current, *rest = numbers
     current = int(current)
 
-    # Abrir parenteses ainda necessários para o primeiro número, caso já não existam suficientes
-    amount = max(_open, current) - min(_open, current)
-
     if not _open:
+        # Abrir parenteses ainda necessários para o primeiro número, caso já não existam suficientes
+        amount = max(_open, current) - min(_open, current)
+
         text += '(' * amount
         _open += amount
 
