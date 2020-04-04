@@ -5,36 +5,41 @@ def get_nesting(numbers, _open=0, text=''):
         return text
 
     # Separar primeiro número passado dos restantes
-    first, *rest = numbers
-    first = int(first)
+    current, *rest = numbers
+    current = int(current)
 
     # Abrir parenteses ainda necessários para o primeiro número, caso já não existam suficientes
-    amount = max(_open, first) - min(_open, first)
-    text += '(' * amount
-    _open += amount
+    amount = max(_open, current) - min(_open, current)
+
+    if not _open:
+        text += '(' * amount
+        _open += amount
 
     # Adicionar o primeiro número passado
-    text += str(first)
+    text += str(current)
 
-    for i in range(_open):
-        if rest and str(first) == rest[0]:
+    while(_open > 0):
+        _next = None
+        if rest:
+            _next = int(rest[0])
+
+        if _next is not None and current == _next:
             # Não abrir parenteses extras para números iguais consecutivos
+            text += str(_next)
+            current, *rest = rest
+            current = int(current)
             continue
-        elif rest and int(first) > int(rest[0]):
+        elif _next is not None and current > _next:
             # Fechar parenteses suficientes já abertos quando o número atual é maior que o próximo
-            amount = (_open - int(rest[0]))
+            amount = (_open - _next)
             text += ')' * amount
             _open -= amount
-
-            text += rest[0]
-            first, *rest = rest
-        elif rest and int(rest[0]) > int(first):
+        elif _next is not None and _next > current:
             # Abrir parenteses extras necessários para o próximo número quando ele for maior que o atual
-            amount = int(rest[0]) - _open
+            amount = max(_next, _open) - min(_next, _open)
             text += '(' * amount
             _open += amount
-            text += rest[0]
-            first, *rest = rest
+        break
 
     # Continuar com restante da String, mantendo valores já alterados
     return get_nesting(rest, _open, text)
