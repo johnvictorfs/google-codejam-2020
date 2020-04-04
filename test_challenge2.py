@@ -1,23 +1,25 @@
 import challenge2
 
+test_cases = {
+    '0000': '0000',
+    '101': '(1)0(1)',
+    '111000': '(111)000',
+    '1': '(1)',
+    '021': '0((2)1)',
+    '312': '(((3))1(2))',
+    '4': '((((4))))',
+    '221': '((22)1)',
+    '99122': '(((((((((99))))))))1(22))',
+    '4444': '((((4444))))',
+    '440044': '((((44))))00((((44))))'
+}
 
-expected = """Case #1: 0000
-Case #2: (1)0(1)
-Case #3: (111)000
-Case #4: (1)
-Case #5: (((33))1(2))
-Case #6: 0
-Case #7: 0((2)1(3(1(((2))))))
-Case #8: 0((2)1)
-Case #9: (((3))1(2))
-Case #10: ((((4))22)1)"""
 
-def a():
-    print(expected)
+def test_output_challenge_2():
+    for _input, output in test_cases.items():
+        assert challenge2.get_nesting(_input) == output
 
-def test_challenge_2(capfd):
-    # challenge2.do_the_thing()
-    a()
-    out, err = capfd.readouterr()
-    assert out == expected
 
+def test_text_output_challenge_2():
+    for index, (_input, output) in enumerate(test_cases.items()):
+        assert challenge2.make_answer_string(index, _input) == f'Case #{index + 1}: {output}'
