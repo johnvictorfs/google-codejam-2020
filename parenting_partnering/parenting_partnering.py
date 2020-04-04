@@ -1,11 +1,8 @@
 def overlaps(a, b):
-    a1_start, a2_end = a
-    b2_start, b2_end = b
-
-    first = range(a1_start, a2_end)
-    second = range(b2_start, b2_end)
-
-    return bool(set(first).intersection(second))
+    a_start, a_end = a
+    b_start, b_end = b
+    
+    return a_end > b_start and b_end > a_start
 
 
 def get_match(acts):
@@ -28,7 +25,7 @@ def get_match(acts):
 
         if overlaps_c and overlaps_j:
             # At least one activity can't be done by either
-            return 'IMPOSSIBLE'
+            return impossible
         elif not overlaps_c:
             # Assign to C
             periods['C'].append(period)

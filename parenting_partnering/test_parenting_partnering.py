@@ -75,6 +75,18 @@ test_cases = [
     {
         'input': [(1,2), (1,2), (3, 4)],
         'output': 'JCJ'
+    },
+    {
+        'input': [(0,1), (0,1), (0,1)],
+        'output': 'IMPOSSIBLE'
+    },
+    {
+        'input': [(0,1), (0,1)],
+        'output': 'CJ'
+    },
+    {
+        'input': [(2, 3), (3, 4), (4, 5), (5, 6)],
+        'output': 'CCCC'
     }
 ]
 
