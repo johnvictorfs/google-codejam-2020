@@ -1,5 +1,7 @@
 def get_nesting(numbers, _open=0, text=''):
     if not numbers:
+        # Final da string, fechar parenteses que restam ser fechados
+        text += ')' * _open
         return text
 
     # Separar primeiro número passado dos restantes
@@ -32,10 +34,6 @@ def get_nesting(numbers, _open=0, text=''):
             _open += _open
             text += rest[0]
             first, *rest = rest
-        else:
-            # Fechar parenteses já abertos conforme necessário
-            text += ')' * _open
-            _open -= _open
 
     # Continuar com restante da String, mantendo valores já alterados
     return get_nesting(rest, _open, text)
@@ -46,7 +44,7 @@ def make_answer_string(index, numbers):
     return 'Case #{}: {}'.format(index + 1, answer)
 
 
-def do_the_thing():
+def nesting_depth():
     test_cases = int(input())
 
     for i in range(test_cases):
@@ -55,4 +53,4 @@ def do_the_thing():
 
 
 if __name__ == '__main__':
-    do_the_thing()
+    nesting_depth()

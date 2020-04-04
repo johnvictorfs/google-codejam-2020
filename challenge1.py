@@ -33,7 +33,7 @@ def num_repeated_columns(array):
     return total
 
 
-def parse_input():
+def vestigium():
     cases = int(input())
 
     for i in range(cases):
@@ -52,4 +52,4 @@ def parse_input():
         print('Case #{}: {} {} {}'.format(i + 1, trace, rows, columns))
 
 
-parse_input()
+vestigium()
